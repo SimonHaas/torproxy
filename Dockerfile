@@ -1,10 +1,9 @@
 FROM alpine
-MAINTAINER David Personette <dperson@gmail.com>
 
-# Install tor and privoxy
 RUN apk --no-cache --no-progress upgrade && \
-    apk --no-cache --no-progress add bash curl privoxy shadow tini tor tzdata&&\
+    apk --no-cache --no-progress add bash curl privoxy shadow tini tor tzdata &&\
     file='/etc/privoxy/config' && \
+    touch $file && \
     sed -i 's|^\(accept-intercepted-requests\) .*|\1 1|' $file && \
     sed -i '/^listen/s|127\.0\.0\.1||' $file && \
     sed -i '/^listen.*::1/s|^|#|' $file && \
@@ -49,7 +48,7 @@ RUN apk --no-cache --no-progress upgrade && \
     echo 'User tor' >>/etc/tor/torrc && \
     echo 'VirtualAddrNetworkIPv4 10.192.0.0/10' >>/etc/tor/torrc && \
     mkdir -p /etc/tor/run && \
-    chown -Rh tor. /var/lib/tor /etc/tor/run && \
+    chown -Rh tor /var/lib/tor /etc/tor/run && \
     chmod 0750 /etc/tor/run && \
     rm -rf /tmp/*
 
