@@ -3,6 +3,9 @@ name: Build torproxy Image
 on:
   workflow_dispatch:
 
+  schedule:
+  - cron: '0 10 12 * *' # once a month at 10:00 on the 12th, an odd choice to avoid peak times
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}/torproxy
