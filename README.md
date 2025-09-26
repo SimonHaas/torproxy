@@ -1,4 +1,4 @@
-[![logo](https://raw.githubusercontent.com/ghcr.io/simonhaas/torproxy/torproxy:latest/master/logo.png)](https://torproject.org/)
+[![logo](https://raw.githubusercontent.com/simonhaas/torproxy/master/logo.png)](https://torproject.org/)
 
 # Tor and Privoxy
 
