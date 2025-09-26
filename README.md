@@ -1,4 +1,4 @@
-[![logo](https://raw.githubusercontent.com/dperson/torproxy/master/logo.png)](https://torproject.org/)
+[![logo](https://raw.githubusercontent.com/ghcr.io/simonhaas/torproxy/torproxy:latest/master/logo.png)](https://torproject.org/)
 
 # Tor and Privoxy
 
@@ -20,15 +20,11 @@ and removing ads and other obnoxious Internet junk.
 
 # How to use this image
 
-**NOTE 1**: this image is setup by default to be a relay only (not an exit node)
-
-**NOTE 2**: this image now supports relaying all traffic through the container,
-see: [tor-route-all-traffic.sh](https://github.com/dperson/torproxy/blob/master/tor-route-all-traffic.sh).
-For it to work, you must set `--net=host` when launching the container.
+**NOTE**: this image is setup by default to be a relay only (not an exit node)
 
 ## Exposing the port
 
-    sudo docker run -it -p 8118:8118 -p 9050:9050 -d dperson/torproxy
+    sudo docker run -it -p 8118:8118 -p 9050:9050 -d ghcr.io/simonhaas/torproxy/torproxy:latest
 
 **NOTE**: it will take a while for tor to bootstrap...
 
@@ -38,7 +34,7 @@ tor via the socks protocol directly at `http://hostname:9050`.
 
 ## Complex configuration
 
-    sudo docker run -it --rm dperson/torproxy -h
+    sudo docker run -it --rm ghcr.io/simonhaas/torproxy/torproxy:latest -h
     Usage: torproxy.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
         -h          This help
@@ -82,24 +78,24 @@ Any of the commands can be run at creation with `docker run` or later with
 ### Setting the Timezone
 
     sudo docker run -it -p 8118:8118 -p 9050:9050 -e TZ=EST5EDT \
-                -d dperson/torproxy
+                -d ghcr.io/simonhaas/torproxy/torproxy:latest
 
 ### Start torproxy setting the allowed bandwidth:
 
-    sudo docker run -it -p 8118:8118 -p 9050:9050 -d dperson/torproxy -b 100
+    sudo docker run -it -p 8118:8118 -p 9050:9050 -d ghcr.io/simonhaas/torproxy/torproxy:latest -b 100
 
 OR
 
-    sudo docker run -it -p 8118:8118 -p 9050:9050 -e BW=100 -d dperson/torproxy
+    sudo docker run -it -p 8118:8118 -p 9050:9050 -e BW=100 -d ghcr.io/simonhaas/torproxy/torproxy:latest
 
 ### Start torproxy configuring it to be an exit node:
 
-    sudo docker run -it -p 8118:8118 -p 9050:9050 -d dperson/torproxy -e
+    sudo docker run -it -p 8118:8118 -p 9050:9050 -d ghcr.io/simonhaas/torproxy/torproxy:latest -e
 
 OR
 
     sudo docker run -it -p 8118:8118 -p 9050:9050 -e EXITNODE=1 \
-                -d dperson/torproxy
+                -d ghcr.io/simonhaas/torproxy/torproxy:latest
 
 ## Test the proxy:
 
@@ -115,7 +111,7 @@ to copy it from a running container:
 Then mount it to a new container like:
 
     sudo docker run -it -p 8118:8118 -p 9050:9050 \
-                -v /some/torrc:/etc/tor/torrc:ro -d dperson/torproxy
+                -v /some/torrc:/etc/tor/torrc:ro -d ghcr.io/simonhaas/torproxy/torproxy:latest
 
 # User Feedback
 
@@ -127,9 +123,14 @@ If you are affected by this issue (a small percentage of users are) please try
 setting the TORUSER environment variable to root, IE:
 
     sudo docker run -it -p 8118:8118 -p 9050:9050 -e TORUSER=root -d \
-                dperson/torproxy
+                ghcr.io/simonhaas/torproxy/torproxy:latest
 
 ### Reporting
 
 If you have any problems with or questions about this image, please contact me
-through a [GitHub issue](https://github.com/dperson/torproxy/issues).
+through a [GitHub issue](https://github.com/simonhaas/torproxy/issues).
+
+# Credit
+
+torproxy was originally created by [dperson](https://github.com/dperson/torproxy).
+As he does not seem to maintain it anymore I forked it and made it my own.
