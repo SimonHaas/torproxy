@@ -2,6 +2,13 @@ FROM alpine
 
 RUN apk --no-cache --no-progress upgrade && \
     apk --no-cache --no-progress add bash curl privoxy shadow tini tor tzdata &&\
+    cp /etc/privoxy/default.filter.new /etc/privoxy/default.filter && \
+    cp /etc/privoxy/user.filter.new /etc/privoxy/user.filter && \
+    cp /etc/privoxy/default.action.new /etc/privoxy/default.action && \
+    cp /etc/privoxy/user.action.new /etc/privoxy/user.action && \
+    cp /etc/privoxy/match-all.action.new /etc/privoxy/match-all.action && \
+    cp /etc/privoxy/config.new /etc/privoxy/config && \
+    chown -R privoxy:privoxy /etc/privoxy && \
     file='/etc/privoxy/config' && \
     touch $file && \
     sed -i 's|^\(accept-intercepted-requests\) .*|\1 1|' $file && \
